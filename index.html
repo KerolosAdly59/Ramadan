@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ramadan Kareem 🌙  💫 🌙</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+
+<style>
+:root {
+  --bg1: #0f2027;
+  --bg2: #203a43;
+  --bg3: #2c5364;
+  --text: white;
+  --card: rgba(255,255,255,0.08);
+}
+
+.light-mode {
+  --bg1: #f7f7f76f;
+  --bg2: #0f86aa;
+  --bg3: #4f7f99;
+  --text: #222;
+  --card: rgba(0,0,0,0.05);
+}
+
+body {
+  margin: 0;
+  font-family: 'Tahoma', sans-serif;
+  background: linear-gradient(var(--bg1), var(--bg2), var(--bg3));
+  color: var(--text);
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 120px 20px 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  background: var(--card);
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  border-radius: 25px;
+  max-width: 600px;
+  margin: auto;
+  box-shadow: 0 0 40px rgba(255,215,0,0.3);
+}
+
+h1 {
+  font-size: 45px;
+  color: gold;
+  margin-bottom: 20px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px gold; }
+  to { text-shadow: 0 0 25px gold; }
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  background: gold;
+  cursor: pointer;
+  margin: 8px;
+  font-weight: bold;
+}
+
+#countdown {
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+/* SVG Lantern */
+.lantern-wrapper {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: swing 3s ease-in-out infinite alternate;
+}
+.extra-section {
+  margin-top: 60px;
+  padding: 20px;
+}
+
+.dua-card, .quotes, .tasbeeh {
+  background: var(--card);
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 600px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 25px rgba(255,215,0,0.2);
+}
+
+.fade {
+  opacity: 0;
+  animation: fadeInText 3s forwards;
+}
+
+.fade:nth-child(2){ animation-delay: 1s; }
+.fade:nth-child(3){ animation-delay: 2s; }
+.fade:nth-child(4){ animation-delay: 3s; }
+
+@keyframes fadeInText {
+  to { opacity: 1; }
+}
+
+footer {
+  margin-top: 40px;
+  padding: 15px;
+  background: rgba(0,0,0,0.2);
+  font-size: 14px;
+}
+.music-player{
+  margin:50px auto;
+  padding:25px;
+  max-width:350px;
+  border-radius:20px;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(15px);
+}
+
+.cover{
+  font-size:50px;
+  animation: spin 4s linear infinite;
+  animation-play-state: paused;
+}
+
+.cover.playing{
+  animation-play-state: running;
+}
+
+@keyframes spin{
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(360deg); }
+}
+
+.controls button{
+  padding:10px 20px;
+  font-size:18px;
+  border:none;
+  border-radius:10px;
+  background: gold;
+  cursor:pointer;
+}
+
+.equalizer{
+  display:flex;
+  justify-content:center;
+  gap:5px;
+  margin:15px 0;
+}
+
+.equalizer span{
+  width:5px;
+  height:15px;
+  background: gold;
+  animation: bounce 1s infinite ease-in-out;
+  animation-play-state: paused;
+}
+
+.equalizer span:nth-child(2){ animation-delay:0.1s; }
+.equalizer span:nth-child(3){ animation-delay:0.2s; }
+.equalizer span:nth-child(4){ animation-delay:0.3s; }
+.equalizer span:nth-child(5){ animation-delay:0.4s; }
+
+@keyframes bounce{
+  0%,100%{ height:15px; }
+  50%{ height:35px; }
+}
+
+.equalizer.playing span{
+  animation-play-state: running;
+}
+
+.volume{
+  width:100%;
+}
+
+
+
+@keyframes swing {
+  from { transform: translateX(-50%) rotate(-10deg); }
+  to { transform: translateX(-50%) rotate(10deg); }
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<div class="lantern-wrapper">
+<svg width="80" height="120" viewBox="0 0 100 150">
+  <rect x="30" y="20" width="40" height="80" rx="20" fill="gold"/>
+  <circle cx="50" cy="60" r="15" fill="orange"/>
+  <line x1="50" y1="0" x2="50" y2="20" stroke="gold" stroke-width="4"/>
+</svg>
+</div>
+
+<div class="container">
+  <div class="card">
+    <h1>🌙 رمضان كريم 🌙</h1>
+
+    <div id="countdown"></div>
+
+    <p>اللهم بلغنا رمضان لا فاقدين ولا مفقودين 🤍</p>
+
+    <button onclick="toggleMode()">🌗 تغيير الوضع</button>
+    <button onclick="shareWhatsApp()">📤 مشاركة واتساب</button>
+  </div>
+  <div class="music-player">
+  <div class="cover">
+    🎵
+  </div>
+
+  <h3>رمضان كريم</h3>
+
+  <div class="controls">
+    <button onclick="toggleSong()" id="playBtn">▶</button>
+  </div>
+
+  <div class="equalizer">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <input type="range" min="0" max="1" step="0.01" value="0.5"
+         onchange="changeVolume(this.value)" class="volume">
+</div>
+
+<audio id="ramadanSong" src="ramadan.mp3"></audio>
+
+  <div class="extra-section">
+
+  <div class="dua-card">
+    <h2>📖 دعاء رمضان</h2>
+    <p>
+      "اللهم إنك عفو تحب العفو فاعفُ عنا"
+    </p>
+  </div>
+
+  <div class="quotes">
+    <h2>✨✨✨ </h2>
+    <p class="fade">رمضان شهر الرحمة والمغفرة والعتق من النار 🤍</p>
+    <p class="fade">أسأل الله أن يكتب لكم فيه السعادة والقبول 🌙</p>
+    <p class="fade">جعله الله شهر تحقيق الأمنيات 💫</p>
+  </div>
+
+  <div class="tasbeeh">
+    <h2>📿 سبّح معنا</h2>
+    <p id="counter">0</p>
+    <button onclick="increaseTasbeeh()">سبحان الله</button>
+  </div>
+
+</div>
+
+<footer>
+ Kerolos ❤️  
+</footer>
+
+</div>
+
+<script>
+
+/* 🌗 Dark/Light Mode */
+function toggleMode(){
+  document.body.classList.toggle("light-mode");
+}
+
+/* 📤 مشاركة واتساب */
+function shareWhatsApp(){
+  const message = "رمضان كريم 🌙✨ كل عام وأنتم بخير!";
+  const url = "https://wa.me/?text=" + encodeURIComponent(message);
+  window.open(url, "_blank");
+}
+
+/* ⏳ Countdown */
+const ramadanDate = new Date("February 19, 2026 00:00:00").getTime();
+const countdown = document.getElementById("countdown");
+
+setInterval(()=>{
+  const now = new Date().getTime();
+  const distance = ramadanDate - now;
+
+  const days = Math.floor(distance/(1000*60*60*24));
+  const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+  const seconds = Math.floor((distance%(1000*60))/1000);
+
+  countdown.innerHTML =
+   `متبقي على رمضان: ${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+},1000);
+
+/* 🎆 Fireworks Multi Colors */
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+const colors = ["gold","red","cyan","lime","orange","white"];
+
+function createFirework(){
+  const x = Math.random()*canvas.width;
+  const y = Math.random()*canvas.height/2;
+  const color = colors[Math.floor(Math.random()*colors.length)];
+
+  for(let i=0;i<60;i++){
+    particles.push({
+      x,
+      y,
+      speedX:(Math.random()-0.5)*6,
+      speedY:(Math.random()-0.5)*6,
+      life:100,
+      color
+    });
+  }
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  particles.forEach((p,index)=>{
+    p.x+=p.speedX;
+    p.y+=p.speedY;
+    p.life--;
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,3,0,Math.PI*2);
+    ctx.fillStyle=p.color;
+    ctx.fill();
+
+    if(p.life<=0){
+      particles.splice(index,1);
+    }
+  });
+
+  requestAnimationFrame(animate);
+}
+
+setInterval(createFirework,1500);
+animate();
+let count = 0;
+
+function increaseTasbeeh(){
+  count++;
+  document.getElementById("counter").innerText = count;
+}
+const song = document.getElementById("ramadanSong");
+const cover = document.querySelector(".cover");
+const equalizer = document.querySelector(".equalizer");
+const playBtn = document.getElementById("playBtn");
+
+song.volume = 0.5;
+let isPlaying = false;
+
+/* 🎵 تشغيل / إيقاف */
+function toggleSong(){
+  if(isPlaying){
+    fadeOut();
+    playBtn.innerText = "▶";
+    cover.classList.remove("playing");
+    equalizer.classList.remove("playing");
+  }else{
+    fadeIn();
+    playBtn.innerText = "⏸";
+    cover.classList.add("playing");
+    equalizer.classList.add("playing");
+  }
+  isPlaying = !isPlaying;
+}
+
+/* 🎶 Fade In */
+function fadeIn(){
+  song.volume = 0;
+  song.play();
+  let vol = 0;
+  let fade = setInterval(()=>{
+    if(vol < 0.5){
+      vol += 0.05;
+      song.volume = vol;
+    }else{
+      clearInterval(fade);
+    }
+  },200);
+}
+
+/* 🎶 Fade Out */
+function fadeOut(){
+  let vol = song.volume;
+  let fade = setInterval(()=>{
+    if(vol > 0.05){
+      vol -= 0.05;
+      song.volume = vol;
+    }else{
+      clearInterval(fade);
+      song.pause();
+    }
+  },200);
+}
+
+/* 🔊 Volume Slider */
+function changeVolume(value){
+  song.volume = value;
+}
+
+
+</script>
+
+</body>
+</html>
